@@ -1,5 +1,4 @@
 import React from "react";
-//import "./FaceRecognized.css";
 
 const FaceRecognized = () => {
 		return (
