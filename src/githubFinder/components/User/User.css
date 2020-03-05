@@ -1,0 +1,80 @@
+#user {
+	display: flex;
+	flex-flow: row wrap;
+	margin-bottom: 24px;
+	border-bottom: 1px solid #d1d5da;
+}
+#user .picture img {
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+}
+#user .picture {
+	border: 1px solid #e1e4e8;
+	border-radius: 2px;
+	padding: 0;
+	min-width: 110px;
+	min-height: 110px;
+	max-height: 295px;
+	max-width: 295px;
+	width: 30%;
+	height: 30%;
+
+}
+#user div:nth-child(2){
+	width: 70%;
+	padding: 0 16px;
+	color: #586069;
+	font-size: 15px;
+	line-height: 1.7;
+}
+#user .main-info {
+	font-size: 1.25em;
+	word-break: break-word;
+}
+#user div.info {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+#user h2 {
+	margin: 0 0 8px 0;
+	font-size: 1.4em;
+    line-height: 30px;
+}
+#user .octicon {
+	fill: #586069;
+}
+#user .octicon.location {
+	margin-right: 5px;
+}
+#user span.location {
+	display: block;
+	margin: 8px 0;
+}
+#user .count {
+	margin: 0 4px;
+	display: inline-block;
+    padding: 3px;
+    font-size: 13px;
+    color: #586069;
+    font-weight: 600;
+    line-height: 1;
+    background-color: rgba(27,31,35,.07);
+    border-radius: 20px;
+}
+#user .bio {
+	display: block;
+	padding: 8px 0;
+	color: #666;
+}
+
+@media screen and (max-width: 650px){
+	#user .info ul li {
+		display: inline-block;
+		font-size: 12px;
+	}
+	#user .main-info { font-size: 1em; }
+	#user .main-info a { font-size: 13px; }
+	#user { flex-wrap: nowrap; }
+}

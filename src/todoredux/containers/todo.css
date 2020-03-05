@@ -1,0 +1,74 @@
+/* FONTS & ICONS */
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+@font-face { font-family: 'fontello';
+  src:  url('../font/fontello.woff?60556245') format('woff'), url('../font/fontello.ttf?60556245') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.icon-trash::before { content: '\f1f8'; transition: all .15s ease;} 
+.icon-googleplay:before { content: '\e803'; transition: all .15s ease; font-size: .5em; } 
+.icon-ok-circled::before { content: '\e801'; transition: all .15s ease; } 
+.icon-recycle:before { content: '\f1b8'; transition: all .15s ease; } 
+.icon-ok-circled:hover::before { color: #7281A5; } 
+.icon-googleplay:hover:before { color: #7281A5; } 
+.icon-recycle:hover:before { color: #7281A5; } 
+.icon-trash:hover::before { color: #7281A5; } 
+[class^="icon-"]::before, [class*=" icon-"]::before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  font-size: 1.5em;
+  margin-right: .2em;
+  text-align: center;
+  color: #8594B8;
+}
+/* ---------- */
+* { box-sizing: border-box; }
+ul {list-style-type: none;}
+a {text-decoration: none; color: inherit; cursor: pointer;}
+button { outline: none; border: none; background: 0; padding-left: 0; cursor: pointer;}
+.container { max-width: 1200px; margin: auto; padding: 0 1rem;}
+
+body {	background-color: #8694B9; }
+#todo {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	font-family: 'Rubik', sans-serif;
+	position: relative;
+}
+header { height: inherit; position: relative; }
+/*header::after { clear: both; content: ''; display: table; }*/
+main {
+	position: relative;
+	min-height: calc(100vh - 75px);
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	align-content: flex-start; 
+	padding: 1rem 1.5% 60px 1.5%;
+}
+main ul {
+	padding-left: 0;
+}
+footer { 
+	position: absolute;
+	bottom: 0;
+	background-color: #687597;
+	color: #fff;
+	width: 100%;
+	font-weight: lighter;
+	font-size: .95em;
+	text-align: right;
+	padding: .75% 15px;
+}
+@media screen and (max-width: 979px){
+	#todo {	max-height: auto; height: auto; }
+	main { height: 100%; }
+}

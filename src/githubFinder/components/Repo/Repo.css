@@ -1,0 +1,35 @@
+.repo {
+	display: flex;
+	flex-flow: row wrap;
+	color: #586069;
+	padding: 20px 0;
+	border-top: 1px solid #d1d5da;
+    border-radius: 3px;
+}
+.repo div {
+	width: 100%;
+}
+.repo > div { margin-bottom: 12px; } 
+.repo div:last-child span {
+	display: inline-block;
+	padding-right: 3pt;
+	font-size: 14px;
+}
+.repo .description {
+	margin: 0 0 12px 5px;
+	display: block;
+}
+.repo .circle {
+	display: inline-block;
+	margin: 8px 5px 0 5px;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background-color: #586069;
+	font-size: 12px;
+}
+.repo h3 { display: inline-block; margin: 0;}
+.repo h3 a { color: #24292e; }
+.repo h3 a:hover { color: #0366d6; text-decoration: none; }
+.repo .octicon { display: inline-block; margin: 0 5px; color: #666; padding-bottom: 2px;}
+.repo p.desc { margin: 0; }

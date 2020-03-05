@@ -1,0 +1,51 @@
+#contact .contacto span {
+	display: block;
+	margin: .35rem 0;
+	padding: .2rem 0;
+}
+#contact .contacto {
+	float: left;
+	width: 30%;
+}
+#contact h3 { margin-top: 0; }
+#contact .contacto div {
+	padding: 1rem;
+}
+#contact .mapa {
+	float: right;
+	width: 65%;
+	padding: 1rem;
+}
+#contact iframe {
+	box-shadow: 0 3px 10px 0 rgba(10,10,10,0.16), 0 3px 15px 0 rgba(10,10,10,0.12);
+}
+#contact .contenido::after {display: table; content: ''; clear: both;}
+#contact .contacto a { font-weight: 600; color: #452A9D; transition: all .2s ease; }
+#contact .contacto a:hover { text-shadow: .5px .5px .5px rgba(250,250,250,.5); }
+#contact div.curriculum { text-align: center; width: 100%; padding: 1.5rem 0;}
+#contact a.curriculum {
+	border-radius: 4px;
+	padding: .7rem 1.2rem;
+	background-color: orange;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+	text-shadow: 2px 2px 2px rgba(0,0,0,.35);
+	display: inline-block;
+	letter-spacing: .35pt;
+	box-shadow: 0 2px 5px 0 rgba(10,10,10,0.16), 0 2px 10px 0 rgba(10,10,10,0.12);
+}
+@media screen and (max-width: 960px){
+	#contact .contacto, #contact .mapa { float: none; width: 100%; }
+	#contact .contacto {
+		display: flex;
+		justify-content: space-between;
+		padding-top: 2rem;
+		font-size: .9em;
+	}
+	#contact .contacto div:last-child { display: flex; flex-direction: column; justify-content: flex-end; }
+}
+@media screen and (max-width: 570px){
+	#contact .contacto { flex-wrap: wrap; }
+	#contact .contacto div:last-child { width: 100%; }
+}

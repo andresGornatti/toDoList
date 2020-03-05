@@ -1,0 +1,25 @@
+.task {
+	padding: .5rem;
+	color: #444;
+	font-weight: 500;
+	display: block;
+	letter-spacing: .35pt;
+	white-space: pre-line;
+    word-break: break-word;
+    padding: 15px 42.5px 15px 15px;
+	line-height: 1.475;
+    transition: color 0.4s;
+	position: relative;
+}
+.task p {
+	display: inline-block;
+}
+.task .close-button {
+	font-size: 1.1rem;
+	cursor: pointer;
+	display: inline-block;
+	position: absolute;
+	bottom: 5px;
+	right: 0;  
+}
+.task p:hover {text-decoration: line-through;}

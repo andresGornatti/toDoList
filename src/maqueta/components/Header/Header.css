@@ -1,0 +1,55 @@
+#logo {
+	display: inline-block;
+	float: left;
+	transition: all .5s ease;
+	transform: scale(1.2);
+}
+#logo:hover { transform: scale(1.25); }
+#navPage nav ul {
+	display: inline-block;
+	float: right;
+	padding-right: .75rem;
+	line-height: 300%;
+	height: auto;
+}
+#navPage li {
+	display: inline-block;
+	font-size: 1.085em;
+	font-weight: 600;
+	letter-spacing: .35pt;
+	margin-left: 1.75rem;
+}
+#navPage a { transition: all .15s ease-in-out; color: #fff;}
+#navPage a.highlight {
+	font-weight: bold;
+	text-shadow: 2px 1.5pt 1px rgba(255,150,19,.5);
+	color: #FFAC44;
+	position: relative;
+}
+#navPage a::after {
+	content: '';
+	display: block;
+	position: relative;
+	width: 0;
+	top: -5.5pt;
+	margin: auto;
+	border-bottom: 2px solid transparent;
+	transition: all .3s ease;
+}
+#navPage a.highlight::after {
+	content: '';
+	display: block;
+	position: relative;
+	width: 65%;
+	top: -5.5pt;
+	margin: auto;
+	border-bottom: 2px solid #FFAC44;
+	box-shadow: .5px .5px .5px rgba(255,150,19,.5);
+}
+#header::after {content: ''; display: table; clear: both;}
+#header {
+	background-color: #282828; /* #25383C */
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+	font-family: 'Raleway', sans-serif;
+	border-bottom: 3px solid;
+}
