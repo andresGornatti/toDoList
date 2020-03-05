@@ -83,6 +83,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./magicbrain/magicbrain/containers/App";
 import * as serviceWorker from './serviceWorker';
+import 'tachyons'; 
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
