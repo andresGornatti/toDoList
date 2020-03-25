@@ -2,15 +2,21 @@ import {
 	AGREGAR_TAREA,
 	ELIMINAR_TAREA,
 	EDITAR_TAREA,
-	ACTIVAR_TAREA,
-	COMPLETAR_TAREA,
-	REHACER_TAREA,
+	LEER_TAREAS,
+	ACTUALIZAR_TAREA
 } from "./constants";
 
-export const addTask = (textTask) => {
+export const readTasks = (tasks) => {
+	return {
+		type: LEER_TAREAS,
+		payload: tasks		
+	}
+}
+
+export const addTask = (task) => {
 	return {
 		type: AGREGAR_TAREA,
-		payload: textTask
+		payload: task
 	}
 }
 export const deleteTask = (task) => {
@@ -26,21 +32,10 @@ export const editTask = (task, newText) => {
 		payload: newText
 	}
 }
-export const activateTask = (task) => {
+export const updateTask = (idTask, taskState) => {
 	return {
-		type: ACTIVAR_TAREA,
-		idTask: task
-	}
-}
-export const completeTask = (task) => {
-	return {
-		type: COMPLETAR_TAREA,
-		idTask: task
-	}
-}
-export const redoTask = (task) => {
-	return {
-		type: REHACER_TAREA,
-		idTask: task
+		type: ACTUALIZAR_TAREA,
+		idTask,
+		taskState
 	}
 }

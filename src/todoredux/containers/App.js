@@ -1,9 +1,23 @@
+// React
 import React from "react";
 import "./todo.css";
+// Components
 import Columna from "../components/Columna/Columna";
 import AddTask from "../components/AddTask/AddTask";
+// Redux, actions to props, connecting to Database when actiones are triggered
 import {connect} from "react-redux";
-import {addTask, deleteTask, editTask, activateTask, completeTask, redoTask} from "../actions";
+import {addTask, readTasks, deleteTask, editTask, updateTask} from "../actions";
+import {addTaskDB, readTasksDB, deleteTaskDB, updateTaskDB} from "../requests";
+// D&D
+import Backend from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
+
+export const TaskContext = React.createContext({
+	updateTask: null,
+	deleteTask: null,
+	editTask: null,
+	idTaskList: null
+})
 
 const mapStateToProps = state => {
 		let settingId=null;
@@ -21,67 +35,72 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		addTask: (event) => {
-			let task = event.target.parentNode.children[0].children[0].value; 
-			dispatch(addTask(task));
-			event.preventDefault();
+		addTask: async (task) => {
+			// let reqBody = {"description": task}
+			// const taskSaved = await addTaskDB(reqBody)
+			// if(!taskSaved) return false
+			// dispatch(addTask(taskSaved))
+				let reqBody = {"description": task, "taskState": 'pending'}
+				dispatch(addTask(reqBody))	
 		},
-		deleteTask: (taskId) => {
-			dispatch(deleteTask(taskId));
+		readTasks: async (id) => {
+			// const tasks = await	readTasksDB()
+			// if(!tasks) return false
+			// dispatch(readTasks(tasks))
+		},
+		deleteTask: async (taskId) => {
+			// const deletedTask = await deleteTaskDB(taskId)
+			// if(!deletedTask) return false
+			// dispatch(deleteTask(deletedTask))
+				dispatch(deleteTask(taskId))
 		},
 		editTask: (task) => {
 			//let idTask = task;
 			dispatch(editTask(task.value))
 		},
-		activateTask: (taskId) => {
-			dispatch(activateTask(taskId));
-		},
-		completeTask: (taskId) => {
-			dispatch(completeTask(taskId));
-		},
-		redoTask: (taskId) => {
-			dispatch(redoTask(taskId));
-		},
+		updateTask: async (taskId, taskState) => {
+			dispatch(updateTask(taskId, taskState))
+		}
 	}
 }
 
-
 class App extends React.Component {
-	// constructor(){
-	// 	super();
-	// }
-
 	componentDidMount(){
-		deleteTask();
+		deleteTask()
+		this.props.readTasks()
 	}
 
 	render(){
+
 		// Map State to Props 
 		const {taskList,idTaskList
 		//	taskText, taskState, leftButtonAction, leftButtonTaskContent, buttonActionClose
 		} = this.props;
 		// Map Dispatch (actions) to Props
-		const {addTask, deleteTask, editTask, activateTask, completeTask, redoTask} = this.props;
+		const {addTask, deleteTask, editTask, updateTask} = this.props;
 
-		const tasksToDo = taskList.filter(task=>{
-			return task.taskState==='listed';
+		const tasksPending = taskList.filter(task=>{
+			return task.taskState==='pending';
 		});
 		const tasksDoing = taskList.filter(task=>{
-			return task.taskState==='activated';
+			return task.taskState==='doing';
 		});
-		const tasksDone = taskList.filter(task=>{
-			return task.taskState==='completed';
+		const tasksFinished = taskList.filter(task=>{
+			return task.taskState==='finished';
 		});
-
 		return (
 		<div id="todo">
 			<header>
 				<AddTask addTask={addTask}/>
 			</header>
 			<main>
-				<Columna columnType="tasksToDo" title="Tareas por hacer" tasks={tasksToDo} deleteTask={deleteTask} editTask={editTask} specialAction={activateTask} idTaskList={idTaskList}/>
-				<Columna columnType="tasksDoing" title="Haciendo ahora" tasks={tasksDoing} deleteTask={deleteTask} editTask={editTask} specialAction={completeTask} idTaskList={idTaskList}/>
-				<Columna columnType="tasksDone" title="Tareas realizadas" tasks={tasksDone} deleteTask={deleteTask} editTask={editTask} specialAction={redoTask} idTaskList={idTaskList}/>
+			<TaskContext.Provider value={{updateTask, deleteTask, editTask, idTaskList}}>
+			<DndProvider backend={Backend}>		
+				<Columna columnType="tasksPending" title="Tareas por hacer" tasks={tasksPending}/>
+				<Columna columnType="tasksDoing" title="Haciendo ahora" tasks={tasksDoing}/>
+				<Columna columnType="tasksFinished" title="Tareas realizadas" tasks={tasksFinished}/>
+			</DndProvider>
+			</TaskContext.Provider>
 			</main>
 			<footer><span><a href="https://andresgornatti.github.io/andresGornatti/">@andresGornatti</a></span></footer>
 		</div>

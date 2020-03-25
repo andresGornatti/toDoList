@@ -5,14 +5,22 @@
   font-weight: normal;
   font-style: normal;
 }
+.icon-pending:before { content: '\e803'; transition: all .15s ease; font-size: .5em; } 
+.icon-doing::before { content: '\e801'; transition: all .15s ease; } 
+.icon-finished:before { content: '\f1b8'; transition: all .15s ease; } 
 .icon-trash::before { content: '\f1f8'; transition: all .15s ease;} 
-.icon-googleplay:before { content: '\e803'; transition: all .15s ease; font-size: .5em; } 
-.icon-ok-circled::before { content: '\e801'; transition: all .15s ease; } 
-.icon-recycle:before { content: '\f1b8'; transition: all .15s ease; } 
-.icon-ok-circled:hover::before { color: #7281A5; } 
-.icon-googleplay:hover:before { color: #7281A5; } 
-.icon-recycle:hover:before { color: #7281A5; } 
+.icon-pending:hover:before { color: #7281A5; } 
+.icon-doing:hover::before { color: #7281A5; } 
+.icon-finished:hover:before { color: #7281A5; } 
 .icon-trash:hover::before { color: #7281A5; } 
+/*.icon-trash
+.icon-googleplay
+.icon-ok
+.icon-recycle
+.icon-ok
+.icon-googleplay
+.icon-recycle
+.icon-trash*/
 [class^="icon-"]::before, [class*=" icon-"]::before {
   font-family: "fontello";
   font-style: normal;
