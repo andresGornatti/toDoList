@@ -20,9 +20,9 @@ const AddTask = ({addTask}) => {
 		 	   autoFocus={true}  required onKeyUp={(e)=>handleAddTask(e)}/>
 	     <span className="bar"></span>
 	     {//<label>Task</label>
+		//<button type="submit" id="add-task" onClick={(e)=>handleAddTask(e)}>Agregar</button>
 	     }
 		</div>
-		<button type="submit" id="add-task" onClick={(e)=>handleAddTask(e)}>Agregar</button>
 		</div>
 	);
 

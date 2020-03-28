@@ -1,0 +1,107 @@
+form {
+	margin: auto;
+	background-color: #05386b;
+	/*background-color: #379683;*/
+	opacity: .9;
+	color: #edf5e1;
+	padding: 1.75em;
+	border-radius: 2px;
+	display: flex;
+	flex-direction: column;
+	max-height: 500px;
+	min-width: 300px;
+	max-width: 450px;
+	width: 35%;
+	height: auto;
+	text-align: center;
+	position: relative;
+	top: -4vh;
+	box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 4px 6px rgba(0,0,0,0.2);
+}
+form h2 {
+	font-size: 1.65em;
+	margin-bottom: 2.5rem;
+}
+form .input-container {
+ 	position: relative; 
+  	margin-bottom: 2.3em;
+}
+form div.button-container {
+  	margin-top: -20px;
+}
+form label {
+	font-size: .9em;
+	text-align: left;
+	transition:0.2s ease all; 
+	position: absolute;
+	pointer-events: none;
+	left: 5px;
+	top: 10px; 
+}
+form input {
+	background-color: rgba(0,0,0,.05);
+    border: none;
+  	border-bottom: 1px solid #8ee4af;
+  	border-bottom:1px solid rgba(0,0,0,.2);
+	color: #edf5e1;
+	padding: 0 6px;
+	margin-bottom: 2px;
+    height: 2.75em;
+	width: 100%;
+}
+form input:focus { outline:none; }
+form input:focus ~ label, form input:valid ~ label {
+  top:-17.5px;
+  font-size: .8em;
+  color:#8ee4af;
+}
+/*BAR*/
+form .bar { position:relative; display:block; }
+form .bar:before, form .bar:after {
+  content:'';
+  height:2px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#8ee4af; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+form .bar:before {
+  left:50%;
+}
+form .bar:after {
+  right:50%; 
+}
+/* active state */
+form input:focus ~ .bar:before, form input:focus ~ .bar:after {
+  width:50%;
+}
+form button {
+	padding: 5px 10px;
+	border-radius: 1px;
+}
+form button[type="button"] {
+	color: #edf5e1;
+	/*margin-top: 1.75rem;*/
+	padding-top: 4em;
+}
+form button[type="submit"] {
+	font-size: 1em;
+	position: absolute;
+	right: 1.75em;
+	margin-left: auto;
+	transition: all .25s ease;
+	color: #05386b;
+	background-color: #edf5e1;
+	text-align: center;
+	box-shadow: 0 0 5px 1px rgba(0,0,0,0.15), 0 4px 6px rgba(0,0,0,0.2);
+}
+/*
+form button[type="submit"]:hover {
+	background-color: #05386b;
+	box-shadow: none;
+	color: #edf5e1;
+}
+*/

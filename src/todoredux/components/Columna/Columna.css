@@ -1,18 +1,20 @@
 .columna {
 	min-height: 120px;
-	height: initial;
 	align-self: flex-start;
-	/*width: 32%;*/
-	background-color: #fff;
+	background-color: #edf5e1;
+	background-color: #fef7f3;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	box-shadow: 0 2px 3px 0 rgba(0,0,0,.15);
 	border-radius: 2px;
 	padding: 1.5rem 1.25rem;
 	overflow: auto;
 }
+	/*height: inherit;*/
+	/*width: 32%;*/
 .columna:nth-child(1), .columna:nth-child(2) { width: 35% }
 .columna:nth-child(3) { width: 26%; }
-.columna h2 {color: #85899d; margin: 0; }
+.columna h2 {color: #85899d; margin: 0; color: #05386b; }
+										/*color: #379683; dark-grey*/
 @media screen and (max-width: 979px){
 	.columna { width: 100%!important; min-height: 170px; margin-bottom: 1.5rem; }
 }

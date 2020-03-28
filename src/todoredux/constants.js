@@ -1,7 +1,10 @@
 export const LEER_TAREAS = "LEER_TAREAS";
 
 export const AGREGAR_TAREA = "AGREGAR_TAREA";
-
 export const ELIMINAR_TAREA = "ELIMINAR_TAREA";
 export const EDITAR_TAREA = "EDITAR_TAREA";	 
 export const ACTUALIZAR_TAREA = "ACTUALIZAR_TAREA";
+
+export const SETEAR_RUTA = "SETEAR_RUTA";
+
+export const ACTUALIZAR_SESION = "ACTUALIZAR_SESION";

@@ -3,16 +3,20 @@ import {
 	ELIMINAR_TAREA,
 	EDITAR_TAREA,
 	LEER_TAREAS,
- 	ACTUALIZAR_TAREA
+ 	ACTUALIZAR_TAREA,
+ 	SETEAR_RUTA,
+	ACTUALIZAR_SESION
 } from "./constants";
 
-let idTaskCounter = 0;
+			//let idTaskCounter = 0;
 const initialStateManageTasks = {
 	taskList: [
-
-	]
+	],
+	route: 'tasks',
+	userLogged: false,
+	user: null
 }
-export const manageTasksR = (state=initialStateManageTasks,action={}) => {
+export const appReducer = (state=initialStateManageTasks,action={}) => {
 	if(action.type===AGREGAR_TAREA && action.payload!==''){
 	//	const {description, _id, taskState, color, category} = action.payload
 	
@@ -20,14 +24,12 @@ export const manageTasksR = (state=initialStateManageTasks,action={}) => {
 							[...state.taskList, {...action.payload,leftButtonContent: 'icon-googleplay'
 												  //leftButtonAction: 'activateTask', 
 												  //buttonActionClose: true,
-													, _id: idTaskCounter
+													  //, _id: idTaskCounter
 												  // Al final las acciones no hace falta ponerlas como State, justamente son acciones y no estados.
 												}							
 				  			];
-			idTaskCounter++;
+			//idTaskCounter++;
 		return Object.assign({}, state, {taskList:updateTaskList})
-
-
 	} else {
 		switch(action.type){
 			case LEER_TAREAS: {
@@ -41,7 +43,7 @@ export const manageTasksR = (state=initialStateManageTasks,action={}) => {
 			case EDITAR_TAREA: {
 				let updateTaskList = state.taskList.map(task=>{
 					if(task._id===action.idTask){
-						task.taskText = action.payload;
+						task.description = action.payload;
 					}
 					return task;
 				});
@@ -50,12 +52,27 @@ export const manageTasksR = (state=initialStateManageTasks,action={}) => {
 			case ACTUALIZAR_TAREA: {
 				let updateTaskList = state.taskList.map(task=>{
 					if(task._id===action.idTask){
-						task.taskState = action.taskState;
+						const updates = Object.keys(action.taskUpdate)
+						updates.forEach(upd=>task[upd]=action.taskUpdate[upd])
 						//task.leftButtonContent= 'icon-ok-circled';
 					}
 					return task;	
 				});
 				return Object.assign({}, state, {taskList:updateTaskList});
+			}
+			case SETEAR_RUTA: {
+				return {...state, route: action.payload}
+			}
+			case  ACTUALIZAR_SESION: {
+				switch (action.sessionState){
+					case 'login':
+					case 'signup':
+					return Object.assign({}, state, {userLogged: true, user: action.user, taskList:[]})
+					//return Object.assign({}, state, {userLogged: true, user: action.user, taskList:[]})
+					case 'logout':
+					return Object.assign({}, state, {userLogged: false, user: null, taskList:[]})
+					default: return state
+				}
 			}
 			default: return state;
 		}	

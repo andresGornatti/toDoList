@@ -3,7 +3,9 @@ import {
 	ELIMINAR_TAREA,
 	EDITAR_TAREA,
 	LEER_TAREAS,
-	ACTUALIZAR_TAREA
+	ACTUALIZAR_TAREA,
+	SETEAR_RUTA,
+	ACTUALIZAR_SESION 
 } from "./constants";
 
 export const readTasks = (tasks) => {
@@ -25,17 +27,30 @@ export const deleteTask = (task) => {
 		idTask: task
 	}
 }
-export const editTask = (task, newText) => {
+export const editTask = (idTask, newText) => {
 	return {
 		type: EDITAR_TAREA,
-		idTask: task,
+		idTask,
 		payload: newText
 	}
 }
-export const updateTask = (idTask, taskState) => {
+export const updateTask = (idTask, taskUpdate) => {
 	return {
 		type: ACTUALIZAR_TAREA,
 		idTask,
-		taskState
+		taskUpdate
+	}
+}
+export const setRoute = (route) => {
+	return {
+		type: SETEAR_RUTA,
+		payload: route 
+	}
+}
+export const updateUserSession = (sessionState, user) => {
+	return {
+		type: ACTUALIZAR_SESION,
+		sessionState,
+		user
 	}
 }

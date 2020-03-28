@@ -1,6 +1,6 @@
 .task {
 	padding: .5rem;
-	color: #444;
+	color: #555;
 	font-weight: 500;
 	display: block;
 	letter-spacing: .35pt;
@@ -10,9 +10,19 @@
 	line-height: 1.475;
     transition: color 0.4s;
 	position: relative;
+	cursor: grab;
+}
+.task:active {
+	cursor: grabbing;
 }
 .task p {
 	display: inline-block;
+}
+.task span { vertical-align: top; height: 100%; padding: .5em 2.5px;}
+.task span[contenteditable="true"]{
+	border: none;
+	opacity: .8;
+	outline: none;
 }
 .task .close-button {
 	font-size: 1.1rem;

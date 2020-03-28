@@ -1,16 +1,17 @@
 #add-task-box {
 	position: relative; /*absolute*/
-	top: -2px;
-	left: -2px;
+	top: -1px;
 	width: 100%;
 	font-family: 'Rubik', sans-serif;
 	display: flex;
-	height: 75px;
+	height: 55px;
 }
 #add-task-box > div {
 	width: 100%;
 	padding: 0;
 }
+/*  ------ BOTON "AGREGAR" -> HIDDEN ------ */
+/*
 #add-task {
 	position: relative;
 	right: 0;
@@ -21,24 +22,28 @@
 	font-family: 'Rubik', sans-serif;
 	letter-spacing: 1pt;
 	font-weight: bold;
-/*	background-color: #01579b;*/
-	background-color: #687597;
-	color: #fff; 
+
+	background-color: #379683;
+	color: #fef7f3; 
 	box-shadow:inset 0 1px 5px 1px rgba(0,0,0,.1), 0 1px 5px 1px rgba(0,0,0,.15);
 }
+	/*background-color: #01579b;*/
+	/*background-color: #05386b;*//*
+*/
 #text-task {
 	margin: 0;
 	height: 100%;
-	padding: 20px 25px;
+	padding: 15px 25px 20px 25px;
 	font-size: 1.55rem;
-	color: #85899d;
+	color: #05386b;
+	background-color: #fef7f3;
 	outline: none;
 	border: none;
 	width: 100%;
-	box-shadow:inset 0 1px 5px 1px rgba(0,0,0,.1);
+	box-shadow:inset 0 1.5px 1px .1px rgba(0,0,0,.1);
 }
 #text-task::placeholder {
-	color: #ddd;
+	color: #999;
 	font-style: italic;
 	font-size: .775em;
 }
@@ -50,8 +55,8 @@
   width:0;
   bottom: .1px; 
   position:absolute;
-/*  background:#01579b;     7282A5        #687597*/
   background-color: #687597;
+  background-color: rgb(114,191,144);   
   transition:0.2s ease all; 
   -moz-transition:0.2s ease all; 
   -webkit-transition:0.2s ease all;
@@ -68,7 +73,3 @@
 		font-size: .85em;
 	}
 }
-
-/*
-label {font-family: 'Roboto', sans-serif; color:#111; font-size: 1rem; font-weight:normal; position:absolute; pointer-events:none; top: 25px; left:15px; transition:0.2s ease all; -moz-transition:0.2s ease all; -webkit-transition:0.2s ease all; } #text-task:focus ~ label, #text-task:valid ~ label {top: 10pt; font-size:.75rem; color:red; }
-*/

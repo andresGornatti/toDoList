@@ -17,11 +17,11 @@ const Columna = ({columnType, tasks, title}) => {
 	const actionForDroppedTask = (taskId) => {
 		switch(columnType){
 			case 'tasksPending':
-			return updateTask(taskId,'pending')
+			return updateTask(taskId,{taskState:'pending'})
 			case 'tasksDoing':
-			return updateTask(taskId,'doing')
+			return updateTask(taskId,{taskState:'doing'})
 			case 'tasksFinished':
-			return updateTask(taskId,'finished')
+			return updateTask(taskId,{taskState:'finished'})
 			default: return false
 		}
 	}
@@ -30,12 +30,13 @@ const Columna = ({columnType, tasks, title}) => {
 		accept:ItemTypes.TASK,
 		drop: (item, monitor) => actionForDroppedTask(item.taskId),
 		collect: monitor => ({
-			isOver: monitor.isOver ? true : false
+			isOver: monitor.isOver() ? true : false
 		})
 	})
-
+	
+	let height = isOver ? `calc(${document.querySelector(`.columna.${columnType}`).offsetHeight}px + 30px)` : 'initial'
 	return (
-		<div className="columna" ref={drop}>
+		<div className={`columna ${columnType}`} ref={drop} style={{height}}>
 		<h2>{title}</h2>
 		<ul>
 		{
