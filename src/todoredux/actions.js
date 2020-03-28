@@ -5,7 +5,8 @@ import {
 	LEER_TAREAS,
 	ACTUALIZAR_TAREA,
 	SETEAR_RUTA,
-	ACTUALIZAR_SESION 
+	ACTUALIZAR_SESION,
+	LEER_USUARIO
 } from "./constants";
 
 export const readTasks = (tasks) => {
@@ -51,6 +52,13 @@ export const updateUserSession = (sessionState, user) => {
 	return {
 		type: ACTUALIZAR_SESION,
 		sessionState,
+		user
+	}
+}
+
+export const getUserLogged = (user) => {
+	return {
+		type: LEER_USUARIO,
 		user
 	}
 }

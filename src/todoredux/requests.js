@@ -110,6 +110,16 @@ export const logoutUserDB = async user => {
 	} catch (e) { return false } 
 }
 
-// try {
-
-// 	} catch (e) { return e }
+export const getUserLoggedDB  = async session => {
+	try {
+		const request = {
+			method: 'POST',
+			headers: {'Content-Type':'application/json',
+					  'Authorization':`Bearer ${session}`}
+		}
+		const response = await fetch(`${svUrl}/users/login/profile`, request)
+		const user = await response.json()
+		if(!response.ok) throw new Error()
+		return user
+	} catch (e) { return false }
+}

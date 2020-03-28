@@ -5,7 +5,8 @@ import {
 	LEER_TAREAS,
  	ACTUALIZAR_TAREA,
  	SETEAR_RUTA,
-	ACTUALIZAR_SESION
+	ACTUALIZAR_SESION,
+	LEER_USUARIO
 } from "./constants";
 
 			//let idTaskCounter = 0;
@@ -73,6 +74,9 @@ export const appReducer = (state=initialStateManageTasks,action={}) => {
 					return Object.assign({}, state, {userLogged: false, user: null, taskList:[]})
 					default: return state
 				}
+			}
+			case  LEER_USUARIO: {
+					return Object.assign({}, state, {userLogged: true, user: action.user, taskList:[]})
 			}
 			default: return state;
 		}	

@@ -26,7 +26,6 @@ class UserForm extends React.Component {
 			if (!loginUser) return false
 			await updateUserSession('login', loginUser)
 			await readTasks()
-			console.log(loginUser, "lasd")
 			setRoute('tasks')
 		}
 		const signup = async e => {
@@ -39,7 +38,6 @@ class UserForm extends React.Component {
 			const user = {name, email, password}
 			const newUser = await createUserDB(user)
 			if (!newUser) return false
-			console.log("USEERRR ", user, "NEW USER ", newUser)
 			await updateUserSession('signup', newUser)
 			setRoute('tasks')
 		}

@@ -8,8 +8,8 @@ import Columna from "../components/Columna/Columna";
 import AddTask from "../components/AddTask/AddTask";
 // Redux, actions to props, connecting to Database when actiones are triggered
 import {connect} from "react-redux";
-import {addTask, readTasks, deleteTask, editTask, updateTask, setRoute, updateUserSession} from "../actions";
-import {addTaskDB, readTasksDB, deleteTaskDB, updateTaskDB} from "../requests";
+import {addTask, readTasks, deleteTask, editTask, updateTask, setRoute, updateUserSession, getUserLogged} from "../actions";
+import {addTaskDB, readTasksDB, deleteTaskDB, updateTaskDB, getUserLoggedDB} from "../requests";
 // D&D
 import Backend from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
@@ -18,6 +18,16 @@ import { DndProvider } from 'react-dnd'
 import validator from 'validator'
 // Generate UUID for Tasks
 import { v4 as uuidv4 } from 'uuid';
+
+
+
+const validateSession = function(){
+	const session = localStorage.getItem('session')
+	let validToken
+	if (session) { validToken = validator.isJWT(session) }
+	const isUserValid = (session && validToken) ? true : false
+	return isUserValid		
+}
 
 const mapStateToProps = state => {
 		let settingId=null;
@@ -37,15 +47,14 @@ const mapStateToProps = state => {
 } 
 
 const mapDispatchToProps = (dispatch) => {
-	const session = localStorage.getItem('session')
-	let validToken
-	if (session) { validToken = validator.isJWT(session) }
-	const isUserValid = (session && validToken) ? true : false
-	// console.log(session, validToken, 'Is User Valid? ',isUserValid)
+	// const session = localStorage.getItem('session')
+	// let validToken
+	// if (session) { validToken = validator.isJWT(session) }
+	// const isUserValid = (session && validToken) ? true : false
+	// // console.log(session, validToken, 'Is User Valid? ',isUserValid)
 	return {
 		addTask: async task => {
-			if (isUserValid) {
-				console.log(isUserValid, 'isUserValid')
+			if (validateSession()) {
 				let reqBody = {"description": task}
 				const taskSaved = await addTaskDB(reqBody)
 				if(!taskSaved) return false
@@ -60,29 +69,32 @@ const mapDispatchToProps = (dispatch) => {
 				dispatch(readTasks(tasks))
 		},
 		deleteTask: async taskId => {
-			if (isUserValid) {
+			if (validateSession()) {
+				// first dispatch for better UX
+				dispatch(deleteTask(taskId))
 				const deletedTask = await deleteTaskDB(taskId)
 				if(!deletedTask) return false
-				dispatch(deleteTask(taskId))
 			} else {
 				dispatch(deleteTask(taskId))
 			}
 		},
 		editTask: async (taskId, taskText) => {
-			if (isUserValid) {
+			if (validateSession()) {
+				// first dispatch for better UX
 				const update = {description: taskText}
+				dispatch(updateTask(taskId, update))
 				const taskUpdated = await updateTaskDB(taskId, update)
 				if(!taskUpdated) return false
-				dispatch(updateTask(taskId, taskUpdated))
 			} else {
 				dispatch(editTask(taskId, taskText))
 			}
 		},
 		updateTask: async (taskId, update) => {
-			if(isUserValid) {
+			if(validateSession()) {
+				// first dispatch for better UX
+				dispatch(updateTask(taskId, update))
 				const taskUpdated = await updateTaskDB(taskId, update)
 				if(!taskUpdated) return false
-				dispatch(updateTask(taskId, taskUpdated))
 			} else {
 				dispatch(updateTask(taskId, update))
 			}
@@ -99,6 +111,13 @@ const mapDispatchToProps = (dispatch) => {
 			 userData = null 
 			} 
 			dispatch(updateUserSession(sessionState, userData))
+		},
+		getUserLogged: async () => {
+			const tkn = localStorage.getItem("session")
+			const user = await getUserLoggedDB(tkn)
+			if (!user) return false
+			const userData = {...user, tkn}
+			dispatch(getUserLogged(userData))
 		}
 	}
 }
@@ -111,6 +130,17 @@ export const TaskContext = React.createContext({
 })
 
 class App extends React.Component {
+
+	componentDidMount(){
+		const readUser = async () => {
+			const sessionValid = validateSession()
+			if(sessionValid){
+				await this.props.getUserLogged()
+				this.props.readTasks()
+			}
+		}
+		readUser()
+	}
 
 	render(){
 
