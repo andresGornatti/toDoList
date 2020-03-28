@@ -1,3 +1,4 @@
+const svUrl = 'https://gornatti-justdoit-api.herokuapp.com' 
 export const addTaskDB = async task => {
 	const token = localStorage.getItem('session')
 	try {
@@ -7,7 +8,7 @@ export const addTaskDB = async task => {
 					  'Authorization':`Bearer ${token}`},
 			body: JSON.stringify(task)
 		}
-		let response = await fetch('http://127.0.0.1:3001/tasks', request)
+		let response = await fetch(`${svUrl}/tasks`, request)
 	 	return await response.json()
 	} catch (e) { return false }
 }
@@ -22,7 +23,7 @@ export const readTasksDB = async () => {
 					  'Authorization':`Bearer ${token}`}
 			//body: JSON.stringify(_id)
 		}
-		const tasks = await fetch('http://127.0.0.1:3001/tasks', request)
+		const tasks = await fetch(`${svUrl}/tasks`, request)
 		return await tasks.json()
 	} catch (e) { return false }
 }
@@ -37,7 +38,7 @@ export const deleteTaskDB = async _id => {
 					  'Authorization':`Bearer ${token}`},
 			body: JSON.stringify({_id})
 		}
-		const response = await fetch(`http://127.0.0.1:3001/tasks/${_id}`, request)
+		const response = await fetch(`${svUrl}/tasks/${_id}`, request)
 		const deletedTask = await response.json()
 		//if(!deletedTask) return false
 		return deletedTask
@@ -53,7 +54,7 @@ export const updateTaskDB = async (id, update) => {
 					  'Authorization':`Bearer ${token}`},
 			body: JSON.stringify(update)
 		}
-		const response = await fetch(`http://127.0.0.1:3001/tasks/${id}`, request)
+		const response = await fetch(`${svUrl}/tasks/${id}`, request)
 		const updatedTask = await response.json()
 		if(!updatedTask) return false
 		return updatedTask
@@ -68,11 +69,9 @@ export const createUserDB = async dataUser => {
 			headers: {'Content-Type':'application/json'},
 			body: JSON.stringify(dataUser)
 		}
-		const response = await fetch('http://127.0.0.1:3001/users', request)
-		console.log(request, response, request.body)
+		const response = await fetch(`${svUrl}/users`, request)
 		const newUser = await response.json()
-		console.log(newUser)
-		if (!newUser) throw new Error()
+		if (!response.ok) throw new Error()
 		localStorage.setItem('session', newUser.token)
 		const user = newUser.user
 		const tkn =  newUser.token 
@@ -88,10 +87,9 @@ export const loginUserDB = async (user) => {
 			headers: {'Content-Type':'application/json'},
 			body: JSON.stringify(user)				
 		}
-		const response = await fetch('http://localhost:3001/users/login', request)
+		const response = await fetch(`${svUrl}/users/login`, request)
 		const userLogged = await response.json()
 		if (!response.ok) throw new Error()
-		console.log('userLogged', userLogged, response)
 		localStorage.setItem('session', userLogged.token)
 		return userLogged
 	} catch (e) { return false } 
@@ -105,7 +103,7 @@ export const logoutUserDB = async user => {
 			headers: {'Content-Type':'application/json',
 					  'Authorization':`Bearer ${token}`}				
 		}
-		const logout = await fetch('http://127.0.0.1:3001/users/logout', request)
+		const logout = await fetch(`${svUrl}/users/logout`, request)
 		if (!logout) throw new Error()
 		localStorage.removeItem('session')
 		return true
