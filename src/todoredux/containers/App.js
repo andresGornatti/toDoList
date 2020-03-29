@@ -22,7 +22,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 const validateSession = function(){
-	const session = localStorage.getItem('session')
+	const session = sessionStorage.getItem('session')
 	let validToken
 	if (session) { validToken = validator.isJWT(session) }
 	const isUserValid = (session && validToken) ? true : false
@@ -47,14 +47,10 @@ const mapStateToProps = state => {
 } 
 
 const mapDispatchToProps = (dispatch) => {
-	// const session = localStorage.getItem('session')
-	// let validToken
-	// if (session) { validToken = validator.isJWT(session) }
-	// const isUserValid = (session && validToken) ? true : false
-	// // console.log(session, validToken, 'Is User Valid? ',isUserValid)
+	const sessionValid = validateSession()
 	return {
 		addTask: async task => {
-			if (validateSession()) {
+			if (sessionValid) {
 				let reqBody = {"description": task}
 				const taskSaved = await addTaskDB(reqBody)
 				if(!taskSaved) return false
@@ -69,7 +65,7 @@ const mapDispatchToProps = (dispatch) => {
 				dispatch(readTasks(tasks))
 		},
 		deleteTask: async taskId => {
-			if (validateSession()) {
+			if (sessionValid) {
 				// first dispatch for better UX
 				dispatch(deleteTask(taskId))
 				const deletedTask = await deleteTaskDB(taskId)
@@ -79,7 +75,7 @@ const mapDispatchToProps = (dispatch) => {
 			}
 		},
 		editTask: async (taskId, taskText) => {
-			if (validateSession()) {
+			if (sessionValid) {
 				// first dispatch for better UX
 				const update = {description: taskText}
 				dispatch(updateTask(taskId, update))
@@ -90,7 +86,7 @@ const mapDispatchToProps = (dispatch) => {
 			}
 		},
 		updateTask: async (taskId, update) => {
-			if(validateSession()) {
+			if(sessionValid) {
 				// first dispatch for better UX
 				dispatch(updateTask(taskId, update))
 				const taskUpdated = await updateTaskDB(taskId, update)
@@ -113,7 +109,7 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(updateUserSession(sessionState, userData))
 		},
 		getUserLogged: async () => {
-			const tkn = localStorage.getItem("session")
+			const tkn = sessionStorage.getItem("session")
 			const user = await getUserLoggedDB(tkn)
 			if (!user) return false
 			const userData = {...user, tkn}

@@ -4,8 +4,7 @@ import {logoutUserDB} from "../../requests";
 const SessionNav = ({userLogged, setRoute, updateUserSession}) => {
 	
 	const logout = async () => {
-		const loggedOut = await logoutUserDB() 
-		console.log(loggedOut, 'loggedOut')
+		const loggedOut = await logoutUserDB()
 		if (!loggedOut) return false
 		await updateUserSession('logout')
 		setRoute('tasks')

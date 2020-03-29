@@ -1,6 +1,6 @@
 const svUrl = 'https://gornatti-justdoit-api.herokuapp.com' 
 export const addTaskDB = async task => {
-	const token = localStorage.getItem('session')
+	const token = sessionStorage.getItem('session')
 	try {
 		const request = {
 			method: 'POST',
@@ -15,7 +15,7 @@ export const addTaskDB = async task => {
 
 export const readTasksDB = async () => {
 	//const {_id} = user
-	const token = localStorage.getItem('session')
+	const token = sessionStorage.getItem('session')
 	try {
 		const request = {
 			method: 'GET',
@@ -29,7 +29,7 @@ export const readTasksDB = async () => {
 }
 
 export const deleteTaskDB = async _id => {
-	const token = localStorage.getItem('session')
+	const token = sessionStorage.getItem('session')
 	try {
 		const request = {
 			// mode: 'no-cors',
@@ -46,7 +46,7 @@ export const deleteTaskDB = async _id => {
 }
 
 export const updateTaskDB = async (id, update) => {
-	const token = localStorage.getItem('session')
+	const token = sessionStorage.getItem('session')
 	try {
 		const request = {
 			method: 'PATCH',
@@ -72,7 +72,7 @@ export const createUserDB = async dataUser => {
 		const response = await fetch(`${svUrl}/users`, request)
 		const newUser = await response.json()
 		if (!response.ok) throw new Error()
-		localStorage.setItem('session', newUser.token)
+		sessionStorage.setItem('session', newUser.token)
 		const user = newUser.user
 		const tkn =  newUser.token 
 		return {...user, tkn}
@@ -90,13 +90,13 @@ export const loginUserDB = async (user) => {
 		const response = await fetch(`${svUrl}/users/login`, request)
 		const userLogged = await response.json()
 		if (!response.ok) throw new Error()
-		localStorage.setItem('session', userLogged.token)
+		sessionStorage.setItem('session', userLogged.token)
 		return userLogged
 	} catch (e) { return false } 
 }
 
 export const logoutUserDB = async user => {
-	const token = localStorage.getItem('session')
+	const token = sessionStorage.getItem('session')
 	try {
 		const request = {
 			method: 'POST',
@@ -105,7 +105,7 @@ export const logoutUserDB = async user => {
 		}
 		const logout = await fetch(`${svUrl}/users/logout`, request)
 		if (!logout) throw new Error()
-		localStorage.removeItem('session')
+		sessionStorage.removeItem('session')
 		return true
 	} catch (e) { return false } 
 }
